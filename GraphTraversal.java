@@ -56,7 +56,7 @@ public class GraphTraversal {
 		
 	}
 	
-	public static void DFS(Bigraph g, int src) {
+	public static void DFS(UndirectedGraph g, int src) {
 		Stack<Integer> st = new Stack();
 		boolean[] visited = new boolean[g.V()];
 		
@@ -76,7 +76,7 @@ public class GraphTraversal {
 		System.out.println();
 	}
 	
-	public static void BFS(Bigraph g, int src) {
+	public static void BFS(UndirectedGraph g, int src) {
 		Queue<Integer> q = new LinkedList<Integer>();
 		boolean[] visited = new boolean[g.V()];
 		

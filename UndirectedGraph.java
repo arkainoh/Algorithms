@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Bigraph {
+public class UndirectedGraph {
 	private int V, E;
 	private ArrayList<Integer>[] adj;
 	
-	public Bigraph(int V) {
+	public UndirectedGraph(int V) {
 		this.V = V;
 		adj = new ArrayList[V];
 		for(int i = 0; i < V; i++)
@@ -32,6 +32,6 @@ public class Bigraph {
 
 	@Override
 	public String toString() {
-		return "Bigraph [" + Arrays.toString(adj) + "]";
+		return "UndirectedGraph [" + Arrays.toString(adj) + "]";
 	}
 }
