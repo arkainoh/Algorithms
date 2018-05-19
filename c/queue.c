@@ -1,41 +1,52 @@
 #include <stdio.h>
+#include <malloc.h>
 #define QUEUE_SIZE 6
 
-int head, tail;
-int Queue[QUEUE_SIZE];
+typedef struct _queue {
+  int head, tail;
+  int data[QUEUE_SIZE];
+} queue;
+typedef queue* Queue;
 
-void initQueue() {
-  head = tail = 0;
+Queue newQueue() {
+  Queue ret = (Queue)malloc(sizeof(queue));
+  ret->head = ret->tail = 0;
+  return ret;
 }
 
-void enQueue(int x) {
-  int next_idx = (tail + 1) % QUEUE_SIZE;
-  Queue[tail] = x;
-  tail = next_idx;
+void enQueue(Queue q, int data) {
+  int next_idx = (q->tail + 1) % QUEUE_SIZE;
+  q->data[q->tail] = data;
+  q->tail = next_idx;
 }
 
-int deQueue() {
-  int prev_idx = head;
-  head = (head + 1) % QUEUE_SIZE;
-  return Queue[prev_idx];
+int deQueue(Queue q) {
+  int prev_idx = q->head;
+  q->head = (q->head + 1) % QUEUE_SIZE;
+  return q->data[prev_idx];
 }
 
-int isFullQueue() {
-  return (tail + 1) % QUEUE_SIZE == head;
+int isFullQueue(Queue q) {
+  return (q->tail + 1) % QUEUE_SIZE == q->head;
 }
 
-int isEmptyQueue() {
-  return head == tail;
+int isEmptyQueue(Queue q) {
+  return q->head == q->tail;
+}
+
+void removeQueue(Queue q) {
+  free(q);
+  q = NULL;
 }
 
 int testQueue() {
-  initQueue();
-  if(isEmptyQueue()) printf("Queue is empty\n");
+  Queue q = newQueue();
+  if(isEmptyQueue(q)) printf("Queue is empty\n");
   else printf("Queue is not empty\n");
 
   for(int i = 1; ; i++) {
-    if(!isFullQueue()) {
-      enQueue(i);
+    if(!isFullQueue(q)) {
+      enQueue(q, i);
       printf("enQueue(%d)\n", i);
     }
     else {
@@ -44,18 +55,20 @@ int testQueue() {
     }
   }
 
-  if(isEmptyQueue()) printf("Queue is empty\n");
+  if(isEmptyQueue(q)) printf("Queue is empty\n");
   else printf("Queue is not empty\n");
 
   for(int i = 1; ; i++) {
-    if(!isEmptyQueue()) {
-      printf("deQueue(): %d\n", deQueue());  
+    if(!isEmptyQueue(q)) {
+      printf("deQueue(): %d\n", deQueue(q));  
     }
     else {
       printf("Queue is empty\n");
       break;
     }
   }
+
+  removeQueue(q);
   return 0;
 }
 
