@@ -1,42 +1,42 @@
 #include <stdio.h>
-#define QSIZE 6
+#define QUEUE_SIZE 6
 
 int head, tail;
-int Q[QSIZE];
+int Queue[QUEUE_SIZE];
 
-void initQ() {
+void initQueue() {
   head = tail = 0;
 }
 
-void enQ(int x) {
-  int next_idx = (tail + 1) % QSIZE;
-  Q[tail] = x;
+void enQueue(int x) {
+  int next_idx = (tail + 1) % QUEUE_SIZE;
+  Queue[tail] = x;
   tail = next_idx;
 }
 
-int deQ() {
+int deQueue() {
   int prev_idx = head;
-  head = (head + 1) % QSIZE;
-  return Q[prev_idx];
+  head = (head + 1) % QUEUE_SIZE;
+  return Queue[prev_idx];
 }
 
-int isFullQ() {
-  return (tail + 1) % QSIZE == head;
+int isFullQueue() {
+  return (tail + 1) % QUEUE_SIZE == head;
 }
 
-int isEmptyQ() {
+int isEmptyQueue() {
   return head == tail;
 }
 
-int testQ() {
-  initQ();
-  if(isEmptyQ()) printf("Queue is empty\n");
+int testQueue() {
+  initQueue();
+  if(isEmptyQueue()) printf("Queue is empty\n");
   else printf("Queue is not empty\n");
 
   for(int i = 1; ; i++) {
-    if(!isFullQ()) {
-      enQ(i);
-      printf("enQ(%d)\n", i);
+    if(!isFullQueue()) {
+      enQueue(i);
+      printf("enQueue(%d)\n", i);
     }
     else {
       printf("Queue is full\n");
@@ -44,12 +44,12 @@ int testQ() {
     }
   }
 
-  if(isEmptyQ()) printf("Queue is empty\n");
+  if(isEmptyQueue()) printf("Queue is empty\n");
   else printf("Queue is not empty\n");
 
   for(int i = 1; ; i++) {
-    if(!isEmptyQ()) {
-      printf("deQ(): %d\n", deQ());  
+    if(!isEmptyQueue()) {
+      printf("deQueue(): %d\n", deQueue());  
     }
     else {
       printf("Queue is empty\n");
@@ -60,6 +60,6 @@ int testQ() {
 }
 
 int main() {
-  testQ();
+  testQueue();
   return 0;
 }
