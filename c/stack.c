@@ -1,37 +1,48 @@
 #include <stdio.h>
+#include <malloc.h>
 #define STACK_SIZE 5
 
-static int top;
-int Stack[STACK_SIZE];
+typedef struct _stack {
+  int top;
+  int data[STACK_SIZE];
+} stack;
+typedef stack* Stack;
 
-void initStack() {
-  top = 0;
+Stack newStack() {
+  Stack s = (Stack)malloc(sizeof(stack));
+  s->top = 0;
+  return s;
 }
 
-void push(int x) {
-  Stack[top++] = x;
+void push(Stack s, int data) {
+  s->data[s->top++] = data;
 }
 
-int pop() {
-  return Stack[--top];
+int pop(Stack s) {
+  return s->data[--s->top];
 }
 
-int isFullStack() {
-  return top == STACK_SIZE;
+int isFullStack(Stack s) {
+  return s->top == STACK_SIZE;
 }
 
-int isEmptyStack() {
-  return top == 0;
+int isEmptyStack(Stack s) {
+  return s->top == 0;
+}
+
+void removeStack(Stack s) {
+  free(s);
+  s = NULL;
 }
 
 int testStack() {
-  initStack();
-  if(isEmptyStack()) printf("Stack is empty\n");
+  Stack s = newStack();
+  if(isEmptyStack(s)) printf("Stack is empty\n");
   else printf("Stack is not empty\n");
 
   for(int i = 1; ; i++) {
-    if(!isFullStack()) {
-      push(i);
+    if(!isFullStack(s)) {
+      push(s, i);
       printf("push(%d)\n", i);
     }
     else {
@@ -40,18 +51,20 @@ int testStack() {
     }
   }
 
-  if(isEmptyStack()) printf("Stack is empty\n");
+  if(isEmptyStack(s)) printf("Stack is empty\n");
   else printf("Stack is not empty\n");
 
   for(int i = 1; ; i++) {
-    if(!isEmptyStack()) {
-      printf("pop(): %d\n", pop());  
+    if(!isEmptyStack(s)) {
+      printf("pop(): %d\n", pop(s));  
     }
     else {
       printf("Stack is empty\n");
       break;
     }
   }
+
+  removeStack(s);
   return 0;
 }
 
