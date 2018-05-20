@@ -33,9 +33,9 @@ void addEdge(AdjacentList g, int from, int to) {
     return;
   }
 
-  Node i = g->adj[from];
-  while(i->next) i = i->next;
-  i->next = newNode(to);
+  Node iter = g->adj[from];
+  while(iter->next) iter = iter->next;
+  iter->next = newNode(to);
 }
 
 void removeAdjacentList(AdjacentList g) {
