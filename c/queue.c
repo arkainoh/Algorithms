@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <malloc.h>
-#define QUEUE_SIZE 6
+#define QUEUE_SIZE 10
 
 typedef struct _queue {
   int head, tail;
-  int data[QUEUE_SIZE];
+  int data[QUEUE_SIZE + 1];
 } queue;
 typedef queue* Queue;
 
@@ -14,20 +14,20 @@ Queue newQueue() {
   return ret;
 }
 
-void enQueue(Queue q, int data) {
-  int next_idx = (q->tail + 1) % QUEUE_SIZE;
+void enqueue(Queue q, int data) {
+  int next_idx = (q->tail + 1) % (QUEUE_SIZE + 1);
   q->data[q->tail] = data;
   q->tail = next_idx;
 }
 
-int deQueue(Queue q) {
+int dequeue(Queue q) {
   int prev_idx = q->head;
-  q->head = (q->head + 1) % QUEUE_SIZE;
+  q->head = (q->head + 1) % (QUEUE_SIZE + 1);
   return q->data[prev_idx];
 }
 
 int isFullQueue(Queue q) {
-  return (q->tail + 1) % QUEUE_SIZE == q->head;
+  return (q->tail + 1) % (QUEUE_SIZE + 1)== q->head;
 }
 
 int isEmptyQueue(Queue q) {
@@ -46,8 +46,8 @@ int testQueue() {
 
   for(int i = 1; ; i++) {
     if(!isFullQueue(q)) {
-      enQueue(q, i);
-      printf("enQueue(%d)\n", i);
+      enqueue(q, i);
+      printf("enqueue(%d)\n", i);
     }
     else {
       printf("Queue is full\n");
@@ -60,7 +60,7 @@ int testQueue() {
 
   for(int i = 1; ; i++) {
     if(!isEmptyQueue(q)) {
-      printf("deQueue(): %d\n", deQueue(q));  
+      printf("dequeue(): %d\n", dequeue(q));  
     }
     else {
       printf("Queue is empty\n");

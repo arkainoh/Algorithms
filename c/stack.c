@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <malloc.h>
-#define STACK_SIZE 5
+#define STACK_SIZE 10
 
 typedef struct _stack {
   int top;
