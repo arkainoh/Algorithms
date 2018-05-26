@@ -51,6 +51,20 @@ void removeTreeNode(TreeNode tn) {
 	free(tn);
 }
 
+TreeNode getMin(BinarySearchTree bst) {
+	if(!bst->root) return NULL;
+	TreeNode iter = bst->root;
+	while(iter->left) iter = iter->left;
+	return iter;
+}
+
+TreeNode getMax(BinarySearchTree bst) {
+	if(!bst->root) return NULL;
+	TreeNode iter = bst->root;
+	while(iter->right) iter = iter->right;
+	return iter;
+}
+
 void removeBinarySearchTree(BinarySearchTree bst) {
 	removeTreeNode(bst->root);
 	bst = NULL;
@@ -74,6 +88,10 @@ void testBinarySearchTree() {
 	printf("size: %d\n", bst->size);
 	printInorder(bst->root);
 	printf("\n");
+	TreeNode max = getMax(bst);
+	TreeNode min = getMin(bst);
+	printf("max: (%d, %d)\n", max->key, max->val);
+	printf("min: (%d, %d)\n", min->key, min->val);
 	removeBinarySearchTree(bst);
 }
 
