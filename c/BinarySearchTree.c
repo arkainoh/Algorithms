@@ -44,11 +44,11 @@ void put(BinarySearchTree bst, int key, int val) {
 	bst->root = _put(bst, bst->root, key, val);
 }
 
-void removeTreeNode(TreeNode tn) {
-	if(!tn) return;
-	removeTreeNode(tn->left);
-	removeTreeNode(tn->right);
-	free(tn);
+void removeTreeNode(TreeNode root) {
+	if(!root) return;
+	removeTreeNode(root->left);
+	removeTreeNode(root->right);
+	free(root);
 }
 
 TreeNode getMin(BinarySearchTree bst) {
@@ -63,6 +63,40 @@ TreeNode getMax(BinarySearchTree bst) {
 	TreeNode iter = bst->root;
 	while(iter->right) iter = iter->right;
 	return iter;
+}
+
+TreeNode _floor(TreeNode root, int key) {
+	TreeNode iter = root, tmp = NULL;
+	while(iter) {
+		if(key < iter->key) iter = iter->left;
+		else if(key > iter->key) {
+			tmp = _floor(root->right, key);
+			if(tmp) return tmp;
+			break;
+		} else return iter;
+	}
+	return iter;
+}
+
+TreeNode _ceiling(TreeNode root, int key) {
+	TreeNode iter = root, tmp = NULL;
+	while(iter) {
+		if(key > iter->key) iter = iter->right;
+		else if(key < iter->key) {
+			tmp = _ceiling(root->left, key);
+			if(tmp) return tmp;
+			break;
+		} else return iter;
+	}
+	return iter;
+}
+
+TreeNode getFloor(BinarySearchTree bst, int key) {
+	return _floor(bst->root, key);
+}
+
+TreeNode getCeiling(BinarySearchTree bst, int key) {
+	return _ceiling(bst->root, key);
 }
 
 void removeBinarySearchTree(BinarySearchTree bst) {
@@ -84,14 +118,21 @@ void testBinarySearchTree() {
 	put(bst, 6, 3);
 	put(bst, 1, 7);
 	put(bst, 2, 5);
+	put(bst, 7, 4);
+	put(bst, 4, 8);
+	put(bst, 9, 3);
 	printf("<BinarySearchTree>\n");
 	printf("size: %d\n", bst->size);
 	printInorder(bst->root);
 	printf("\n");
 	TreeNode max = getMax(bst);
 	TreeNode min = getMin(bst);
+	TreeNode f = getFloor(bst, 5);
+	TreeNode c = getCeiling(bst, 5);
 	printf("max: (%d, %d)\n", max->key, max->val);
 	printf("min: (%d, %d)\n", min->key, min->val);
+	printf("floor(5): (%d, %d)\n", f->key, f->val);
+	printf("ceiling(5): (%d, %d)\n", c->key, c->val);
 	removeBinarySearchTree(bst);
 }
 
