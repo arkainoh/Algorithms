@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <madqoc.h>
+#include <malloc.h>
 
 typedef struct _node* Node;
 typedef struct _node {
@@ -28,11 +28,15 @@ Node newNode(int data, Node prev, Node next) {
   return ret;
 }
 
+int isEmptyDynamicQueue(DynamicQueue dq) {
+  return !dq->head;
+}
+
 void enqueue(DynamicQueue dq, int data) {
   if(!dq->head) dq->head = dq->tail = newNode(data, NULL, NULL);
   else {
-    tail->next = newNode(data, tail, NULL);
-    tail = tail->next;
+    dq->tail->next = newNode(data, dq->tail, NULL);
+    dq->tail = dq->tail->next;
   }
   dq->size++;
 }
@@ -45,10 +49,10 @@ int dequeue(DynamicQueue dq) {
     dq->head = dq->tail = NULL;
   }
   else {
-    Node tmp = head;
+    Node tmp = dq->head;
     ret = tmp->data;
-    head = head->next;
-    head->prev = NULL;
+    dq->head = dq->head->next;
+    dq->head->prev = NULL;
     free(tmp);
   }
   dq->size--;
@@ -62,6 +66,8 @@ void removeDynamicQueue(DynamicQueue dq) {
     iter = iter->next;
     free(tmp);
   }
+  free(dq);
+  dq = NULL;
 }
 
 void printDynamicQueue(DynamicQueue dq) {
@@ -75,32 +81,33 @@ void printDynamicQueue(DynamicQueue dq) {
   printf("]\n");
 }
 
-void testDynamicQueue() {
-  LinkedList dq = newLinkedList();
+int testDynamicQueue() {
+  DynamicQueue dq = newDynamicQueue();
+  if(isEmptyDynamicQueue(dq)) printf("DynamicQueue is empty\n");
+  else printf("DynamicQueue is not empty\n");
 
-  add(dq, 3);
-  add(dq, 2);
-  add(dq, 4);
-  add(dq, 8);
-  add(dq, 7);
-  
-  printLinkedList(dq);
+  for(int i = 1; i < 100; i++) {
+    enqueue(dq, i);
+    printf("enqueue(%d)\n", i);
+  }
 
-  printf("rmv(%d)\n", 4);
-  rmv(dq, 4);
+  if(isEmptyDynamicQueue(dq)) printf("DynamicQueue is empty\n");
+  else printf("DynamicQueue is not empty\n");
 
-  printLinkedList(dq);
-
-  printf("search(%d): %d\n", 3, search(dq, 3)->data);
-  Node n = search(dq, 4);
-  printf("search(%d): ", 4);
-  if(n) printf("%d\n", n->data);
-  else printf("couldn't find %d\n", 4);
-
-  removeLinkedList(dq);
+  for(int i = 1; ; i++) {
+    if(!isEmptyDynamicQueue(dq)) {
+      printf("dequeue(): %d\n", dequeue(dq));  
+    }
+    else {
+      printf("DynamicQueue is empty\n");
+      break;
+    }
+  }
+  removeDynamicQueue(dq);
+  return 0;
 }
 
 int main() {
-  testLinkedList();
+  testDynamicQueue();
   return 0;
 }
