@@ -44,6 +44,7 @@ int isEmptyDynamicStack(DynamicStack ds) {
 }
 
 void removeDynamicStack(DynamicStack ds) {
+  free(ds->data);
   free(ds);
   ds = NULL;
 }
