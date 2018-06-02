@@ -83,6 +83,8 @@ void removeLinkedList(LinkedList ll) {
     iter = iter->next;
     free(tmp);
   }
+  free(ll);
+  ll = NULL;
 }
 
 void printLinkedList(LinkedList ll) {
