@@ -3,14 +3,12 @@
 #define INIT_CAPACITY 4
 
 typedef struct _dynamicStack {
-  int top;
-  int capacity;
-  int* data;
+  int top, capacity, *data;
 } dynamicStack;
 typedef dynamicStack* DynamicStack;
 
 DynamicStack newDynamicStack() {
-  DynamicStack ds = (DynamicStack)malloc(sizeof(DynamicStack));
+  DynamicStack ds = (DynamicStack)malloc(sizeof(dynamicStack));
   ds->data = (int*)malloc(sizeof(int) * INIT_CAPACITY);
   ds->top = 0;
   ds->capacity = INIT_CAPACITY;
