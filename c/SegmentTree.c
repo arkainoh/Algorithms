@@ -10,7 +10,7 @@ SegmentTree newSegmentTree(int size, int* data) {
   int cnt = 0;
   SegmentTree ret = (SegmentTree)malloc(sizeof(segmentTree));
   ret->size = size;
-  for(ret->capacity = 1; ret->capacity < size; ret->capacity *= 2);
+  for(ret->capacity = 1; ret->capacity < ret->size; ret->capacity *= 2);
   ret->data = (int*)malloc(sizeof(int) * ret->capacity * 2);
   for(int i = ret->capacity; i < ret->capacity + ret->size; i++) ret->data[i] = data[cnt++];
   for(int i = ret->capacity + ret->size; i < ret->capacity * 2; i++) ret->data[i] = 0;  
