@@ -18,9 +18,9 @@ SegmentTree newSegmentTree(int size, int* data) {
   return ret;
 }
 
-void update(SegmentTree st, int idx, int val) {
+void update(SegmentTree st, int idx, int data) {
   int iter = st->capacity + idx;
-  st->data[iter] = val;
+  st->data[iter] = data;
   for(iter = iter / 2; iter > 0; iter--) st->data[iter] = st->data[iter * 2] + st->data[iter * 2 + 1];
 }
 
