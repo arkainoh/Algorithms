@@ -18,7 +18,7 @@ SegmentTree newSegmentTree(int size, int* data) {
   return ret;
 }
 
-void update(SegmentTree st, int idx, int data) {
+void put(SegmentTree st, int idx, int data) {
   int iter = st->capacity + idx;
   st->data[iter] = data;
   for(iter = iter / 2; iter > 0; iter--) st->data[iter] = st->data[iter * 2] + st->data[iter * 2 + 1];
@@ -60,10 +60,10 @@ void testSegmentTree() {
   SegmentTree st = newSegmentTree(10, a);
   printf("Initial status\n");
   printSegmentTree(st);
-  update(st, 3, 6);
-  update(st, 5, 4);
-  printf("\nupdate(3, 6)\n");
-  printf("update(5, 4)\n");
+  put(st, 3, 6);
+  put(st, 5, 4);
+  printf("\nput(3, 6)\n");
+  printf("put(5, 4)\n");
   printSegmentTree(st);
   printf("\nquery(%d, %d): %d\n", 0, 9, query(st, 0, 9));
   printf("query(%d, %d): %d\n", 2, 6, query(st, 2, 6));
