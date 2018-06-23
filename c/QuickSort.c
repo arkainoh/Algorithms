@@ -11,15 +11,15 @@ void swap(int* arr, int i, int j) {
 }
 
 int partition(int* arr, int from, int to) {
-    int i = from, j = to + 1;
-    while(1) {
-      while(arr[++i] < arr[from]) if(i == to) break;
-      while(arr[from] < arr[--j]);
-      if(i >= j) break;
-      swap(arr, i, j);
-    }
-    swap(arr, from, j);
-    return j;
+  int i = from, j = to + 1;
+  while(1) {
+    while(arr[++i] < arr[from]) if(i == to) break;
+    while(arr[from] < arr[--j]);
+    if(i >= j) break;
+    swap(arr, i, j);
+  }
+  swap(arr, from, j);
+  return j;
 }
 
 void QuickSort(int* arr, int from, int to) {
