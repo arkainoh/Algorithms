@@ -4,24 +4,25 @@
 int N;
 int* arr;
 int* cpy;
-void MergeSort(int* arr, int start, int length, int* cpy) {
-  if (start + 1 == length) {
-    arr[start] = cpy[start];
+
+void MergeSort(int* arr, int from, int to, int* cpy) {
+  if (from == to) {
+    arr[from] = cpy[from];
     return;
   }
-  int mid = (start + length) / 2;
-  MergeSort(cpy, start, mid, arr);
-  MergeSort(cpy, mid, length, arr);
+  int mid = (from + to) / 2;
+  MergeSort(cpy, from, mid, arr);
+  MergeSort(cpy, mid + 1, to, arr);
  
-  int i = start, j = mid, k = start;
-  while (i < mid && j < length) {
+  int i = from, j = mid + 1, k = from;
+  while (i <= mid && j <= to) {
     if (cpy[i] < cpy[j]) arr[k++] = cpy[i++];
     else arr[k++] = cpy[j++];
   }
-  while (i < mid) arr[k++] = cpy[i++];
-  while (j < length) arr[k++] = cpy[j++];
+  while (i <= mid) arr[k++] = cpy[i++];
+  while (j <= to) arr[k++] = cpy[j++];
 }
- 
+
 int main() {
   scanf("%d", &N);
   arr = (int*)malloc(sizeof(int) * N);
@@ -30,7 +31,7 @@ int main() {
     scanf("%d", &arr[i]);
     cpy[i] = arr[i];
   }
-  MergeSort(arr, 0, N, cpy);
+  MergeSort(arr, 0, N - 1, cpy);
   for (int i = 0; i < N; i++) printf("%d ", arr[i]);
   printf("\n");
   return 0;
