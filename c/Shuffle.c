@@ -8,8 +8,8 @@ void swap(int* arr, int i, int j) {
   arr[j] = tmp;
 }
 
-void Shuffle(int* arr, int N) {
-  for(int i = N - 1; i > 0; i--) {
+void Shuffle(int* arr, int from, int to) {
+  for(int i = to; i > from; i--) {
     int r = rand() % (i + 1);
     swap(arr, r, i);
   }
@@ -17,7 +17,7 @@ void Shuffle(int* arr, int N) {
 
 void testShuffle() {
   int arr[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-  Shuffle(arr, 10);
+  Shuffle(arr, 0, 9);
   for(int i = 0; i < 10; i++) printf("%d ", arr[i]);
   printf("\n");
 }
