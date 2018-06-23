@@ -4,22 +4,22 @@
 int N;
 int* arr;
 int* cpy;
-void MergeSort(int* arr, int from, int to, int* cpy) {
-  if (from + 1 == to) {
-    arr[from] = cpy[from];
+void MergeSort(int* arr, int start, int length, int* cpy) {
+  if (start + 1 == length) {
+    arr[start] = cpy[start];
     return;
   }
-  int mid = (from + to) / 2;
-  MergeSort(cpy, from, mid, arr);
-  MergeSort(cpy, mid, to, arr);
+  int mid = (start + length) / 2;
+  MergeSort(cpy, start, mid, arr);
+  MergeSort(cpy, mid, length, arr);
  
-  int i = from, j = mid, k = from;
-  while (i < mid && j < to) {
+  int i = start, j = mid, k = start;
+  while (i < mid && j < length) {
     if (cpy[i] < cpy[j]) arr[k++] = cpy[i++];
     else arr[k++] = cpy[j++];
   }
   while (i < mid) arr[k++] = cpy[i++];
-  while (j < to) arr[k++] = cpy[j++];
+  while (j < length) arr[k++] = cpy[j++];
 }
  
 int main() {
