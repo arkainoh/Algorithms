@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 int Ceiling(int* arr, int from, int to, int target) {
-    while (from <= to) {
+    while(from <= to) {
         int mid = (from + to) / 2;
-        if (arr[mid] > target) to = mid - 1;
+        if(arr[mid] > target) to = mid - 1;
         else from = mid + 1;
     }
     return from;

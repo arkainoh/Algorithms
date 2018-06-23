@@ -55,9 +55,7 @@ int testStack() {
   else printf("Stack is not empty\n");
 
   for(int i = 1; ; i++) {
-    if(!isEmptyStack(s)) {
-      printf("pop(): %d\n", pop(s));  
-    }
+    if(!isEmptyStack(s)) printf("pop(): %d\n", pop(s));  
     else {
       printf("Stack is empty\n");
       break;

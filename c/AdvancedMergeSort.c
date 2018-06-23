@@ -51,9 +51,9 @@ void AdvancedMergeSort(int* arr, int from, int to) {
 int main() {
   scanf("%d", &N);
   arr = (int*)malloc(sizeof(int) * N);
-  for (int i = 0; i < N; i++) scanf("%d", &arr[i]);
+  for(int i = 0; i < N; i++) scanf("%d", &arr[i]);
   AdvancedMergeSort(arr, 0, N - 1);
-  for (int i = 0; i < N; i++) printf("%d ", arr[i]);
+  for(int i = 0; i < N; i++) printf("%d ", arr[i]);
   printf("\n");
   return 0;
 }
