@@ -27,7 +27,7 @@ int dequeue(Queue q) {
 }
 
 int isFullQueue(Queue q) {
-  return (q->tail + 1) % (QUEUE_SIZE + 1)== q->head;
+  return (q->tail + 1) % (QUEUE_SIZE + 1) == q->head;
 }
 
 int isEmptyQueue(Queue q) {
