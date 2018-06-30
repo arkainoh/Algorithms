@@ -2,10 +2,10 @@
 #include <malloc.h>
 #define PQ_SIZE 10
 
-void swap(int* a, int* b) {
-  int tmp = *a;
-  *a = *b;
-  *b = tmp;
+void swap(int* arr, int i, int j) {
+  int tmp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = tmp;
 }
 
 typedef struct _priorityQueue {
@@ -28,7 +28,7 @@ void enqueue(PriorityQueue pq, int data) {
 
   for(int i = pq->size; i != 1; i /= 2) {
     if(pq->cmp(pq->data[i], pq->data[i / 2])) {
-      swap(&pq->data[i], &pq->data[i / 2]);
+      swap(pq->data, i, i / 2);
     } else break;
   }
 }
@@ -41,10 +41,9 @@ int dequeue(PriorityQueue pq) {
   while(idx < pq->size) {
     if(idx * 2 > pq->size) break;
     next_idx = idx * 2;
-    if(next_idx <= pq->size) tmp = &pq->data[next_idx];
-    if(next_idx + 1 <= pq->size && pq->cmp(pq->data[next_idx + 1], *tmp)) tmp = &pq->data[++next_idx];
+    if(next_idx + 1 <= pq->size && pq->cmp(pq->data[next_idx + 1], pq->data[next_idx])) ++next_idx;
 
-    if(pq->cmp(*tmp, pq->data[idx])) swap(tmp, &pq->data[idx]);
+    if(pq->cmp(pq->data[next_idx], pq->data[idx])) swap(pq->data, idx, next_idx);
     else break;
     idx = next_idx;
   }
