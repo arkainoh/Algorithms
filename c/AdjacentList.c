@@ -2,6 +2,8 @@
 #include <malloc.h>
 #define VERTICES 10
 
+int N;
+
 typedef struct _node* Node;
 typedef struct _node {
   int vertex;
@@ -11,7 +13,6 @@ typedef struct _node {
 typedef struct _adjacentList {
   Node adj[VERTICES + 1];
 } adjacentList;
-
 typedef adjacentList* AdjacentList;
 
 AdjacentList newAdjacentList() {
@@ -53,14 +54,9 @@ void removeAdjacentList(AdjacentList g) {
   g = NULL;
 }
 
-void testAdjacentList() {
-  AdjacentList g = newAdjacentList();
+void printAdjacentList(AdjacentList g) {
   Node iter;
-  addEdge(g, 3, 1);
-  addEdge(g, 2, 4);
-  addEdge(g, 1, 2);
-  addEdge(g, 1, 6);
-  for(int i = 1; i <= VERTICES; i++) {
+  for(int i = 1; i <= N; i++) {
     iter = g->adj[i];
     printf("%d: ", i);
     while(iter) {
@@ -69,6 +65,17 @@ void testAdjacentList() {
     }
     printf("\n");
   }
+}
+
+void testAdjacentList() {
+  N = 3;
+  AdjacentList g = newAdjacentList();
+  Node iter;
+  addEdge(g, 3, 1);
+  addEdge(g, 2, 4);
+  addEdge(g, 1, 2);
+  addEdge(g, 1, 6);
+  printAdjacentList(g);
 }
 
 int main() {
