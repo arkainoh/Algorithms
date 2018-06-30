@@ -11,7 +11,7 @@ void addEdge(int(*g)[VERTICES + 1], int from, int to, int weight) {
 void printWeightedAdjacentMatrix(int(*g)[VERTICES + 1]) {
   for(int i = 1; i <= N; i++) {
     printf("%d: ", i);
-    for(int j = 1; j <= N; j++) printf("%d ", g[i][j]);
+    for(int j = 1; j <= N; j++) if(g[i][j]) printf("%d(%d) ", j, g[i][j]);
     printf("\n");
   }
 }
