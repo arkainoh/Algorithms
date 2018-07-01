@@ -107,7 +107,7 @@ int GraphDijkstra(int start_point, int destination) {
       }
     }
   }
-  return score[destination];
+  return -1;
 }
 
 void initData() {
@@ -152,7 +152,7 @@ void printOptimalPath(int start_point, int destination) {
   printf("\n");
 }
 
-void testDijkstra() {
+void testGraphDijkstra() {
   int start_point = 1, destination = 6;
   int sol;
   pq = newPriorityQueue(cmp);
@@ -171,6 +171,6 @@ void testDijkstra() {
 }
 
 int main() {
-  testDijkstra();
+  testGraphDijkstra();
   return 0;
 }
