@@ -35,7 +35,6 @@ void enqueue(PriorityQueue pq, int data) {
 
 int dequeue(PriorityQueue pq) {
   int idx = 1, next_idx, ret = pq->data[idx];
-  int* tmp;
   pq->data[idx] = pq->data[pq->size--];
 
   while(idx < pq->size) {
