@@ -151,7 +151,7 @@ void testGridDFS() {
   printf("         Initial status\n");
   printMap(start_point, destination);
   sol = GridDFS(start_point, destination);
-  printf("\n       After applying DFS\n");
+  printf("\n       After applying GridDFS\n");
   printMap(start_point, destination);
   printf("\nSolution: %d\n", sol);
   removeStack(s);

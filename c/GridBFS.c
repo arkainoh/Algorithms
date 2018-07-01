@@ -155,7 +155,7 @@ void testGridBFS() {
   printf("         Initial status\n");
   printMap(start_point, destination);
   sol = GridBFS(start_point, destination);
-  printf("\n       After applying BFS\n");
+  printf("\n       After applying GridBFS\n");
   printMap(start_point, destination);
   printf("\nSolution: %d\n", sol);
   removeQueue(q);
