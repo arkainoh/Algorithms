@@ -111,7 +111,7 @@ int GraphDijkstra(int start_point, int destination) {
 }
 
 void initData() {
-  for(int i = 1; i <= VERTICES; i++) {
+  for(int i = 1; i <= N; i++) {
     score[i] = INFINITY;
     edgeTo[i] = i;
   }

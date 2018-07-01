@@ -78,7 +78,7 @@ int GraphBFS(int start_point, int destination) {
 }
 
 void initScore() {
-  for(int i = 1; i <= VERTICES; i++) score[i] = -1;
+  for(int i = 1; i <= N; i++) score[i] = -1;
 }
 
 void printScore() {
