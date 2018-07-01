@@ -11,9 +11,7 @@ void addEdge(int(*g)[VERTICES + 1], int from, int to) {
 void printAdjacentMatrix(int(*g)[VERTICES + 1]) {
   for(int i = 1; i <= N; i++) {
     printf("%d: ", i);
-    for(int v = 1; v <= g[i][0]; v++) {
-      printf("%d ", g[i][v]);
-    }
+    for(int v = 1; v <= g[i][0]; v++) printf("%d ", g[i][v]);
     printf("\n");
   }
 }
