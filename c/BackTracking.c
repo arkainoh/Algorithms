@@ -13,12 +13,12 @@ int isPossible(int v, int c) {
   return 1;
 }
 
-int BackTracking(int s, int e) {
-  if(s > e) return 1;
+int BackTracking(int s) {
+  if(s > N) return 1;
   for(int c = 1; c <= colors; c++) {
     if(isPossible(s, c)) {
       color[s] = c;
-      if(BackTracking(s + 1, e)) return 1;
+      if(BackTracking(s + 1)) return 1;
       color[s] = 0;
     }
   }
@@ -47,7 +47,7 @@ void getTestGraph() {
 
 void testBackTracking() {
   getTestGraph();
-  if(BackTracking(1, N)) {
+  if(BackTracking(1)) {
     printf("Colors: ");
     printColors();
   } else printf("Not possible");
