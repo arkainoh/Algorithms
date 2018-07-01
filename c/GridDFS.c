@@ -24,6 +24,8 @@ typedef struct _stack {
 } stack;
 typedef stack* Stack;
 
+Stack s;
+
 Stack newStack() {
   Stack s = (Stack)malloc(sizeof(stack));
   s->top = 0;
@@ -120,7 +122,7 @@ void getTestMap() {
   strcpy(map[9], "#........#");
 }
 
-int GridDFS(Stack s, point start_point, point destination) {
+int GridDFS(point start_point, point destination) {
   map[start_point.x][start_point.y] = 0;
   push(s, start_point);
   while(!isEmptyStack(s)) {
@@ -143,12 +145,12 @@ int GridDFS(Stack s, point start_point, point destination) {
 void testGridDFS() {
   point start_point, destination;
   int sol;
-  Stack s = newStack();
+  s = newStack();
   getTestMap();
   preprocessMap(&start_point, &destination);
   printf("         Initial status\n");
   printMap(start_point, destination);
-  sol = GridDFS(s, start_point, destination);
+  sol = GridDFS(start_point, destination);
   printf("\n       After applying DFS\n");
   printMap(start_point, destination);
   printf("\nSolution: %d\n", sol);

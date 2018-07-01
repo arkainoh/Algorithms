@@ -24,6 +24,8 @@ typedef struct _queue {
 } queue;
 typedef queue* Queue;
 
+Queue q;
+
 Queue newQueue() {
   Queue ret = (Queue)malloc(sizeof(queue));
   ret->head = ret->tail = 0;
@@ -124,7 +126,7 @@ void getTestMap() {
   strcpy(map[9], "#........#");
 }
 
-int GridBFS(Queue q, point start_point, point destination) {
+int GridBFS(point start_point, point destination) {
   map[start_point.x][start_point.y] = 0;
   enqueue(q, start_point);
   while(!isEmptyQueue(q)) {
@@ -147,12 +149,12 @@ int GridBFS(Queue q, point start_point, point destination) {
 void testGridBFS() {
   point start_point, destination;
   int sol;
-  Queue q = newQueue();
+  q = newQueue();
   getTestMap();
   preprocessMap(&start_point, &destination);
   printf("         Initial status\n");
   printMap(start_point, destination);
-  sol = GridBFS(q, start_point, destination);
+  sol = GridBFS(start_point, destination);
   printf("\n       After applying BFS\n");
   printMap(start_point, destination);
   printf("\nSolution: %d\n", sol);
