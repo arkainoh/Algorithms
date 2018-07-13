@@ -124,7 +124,7 @@ void printScore() {
   printf("\n");
 }
 
-void getTestGraph() {
+void getTestGraph1() {
   N = 6;
   int(*g)[VERTICES + 1][2] = WeightedAdjacentVertexMatrix;
   addEdge(g, 1, 2, 10);
@@ -136,6 +136,19 @@ void getTestGraph() {
   addEdge(g, 4, 6, 20);
   addEdge(g, 5, 6, 20);
   addEdge(g, 6, 4, 20);
+}
+
+void getTestGraph2() {
+  N = 5;
+  int(*g)[VERTICES + 1][2] = WeightedAdjacentVertexMatrix;
+  addEdge(g, 1, 2, -1);
+  addEdge(g, 1, 3, 4);
+  addEdge(g, 2, 3, 3);
+  addEdge(g, 2, 4, 2);
+  addEdge(g, 2, 5, 2);
+  addEdge(g, 4, 2, 1);
+  addEdge(g, 4, 3, 5);
+  addEdge(g, 5, 4, -3);
 }
 
 void printOptimalPath(int start_point, int destination) {
@@ -151,11 +164,31 @@ void printOptimalPath(int start_point, int destination) {
   printf("\n");
 }
 
-void testGraphDijkstra() {
+void testGraphDijkstra1() {
+  printf("\nTest 1\n");
   int start_point = 1, destination = 6;
   int sol;
   pq = newPriorityQueue(cmp);
-  getTestGraph();
+  getTestGraph1();
+  initData();
+  printWeightedAdjacentVertexMatrix(WeightedAdjacentVertexMatrix);
+  printf("\nInitial status\n");
+  printScore();
+  sol = GraphDijkstra(start_point, destination);
+  printf("\nAfter applying GraphDijkstra\n");
+  printScore();
+  printf("\nOptimal path from %d to %d: ", start_point, destination);
+  printOptimalPath(start_point, destination);
+  printf("\nSolution: %d\n", sol);
+  removePriorityQueue(pq);
+}
+
+void testGraphDijkstra2() {
+  printf("\nTest 2\n");
+  int start_point = 1, destination = 5;
+  int sol;
+  pq = newPriorityQueue(cmp);
+  getTestGraph2();
   initData();
   printWeightedAdjacentVertexMatrix(WeightedAdjacentVertexMatrix);
   printf("\nInitial status\n");
@@ -170,6 +203,7 @@ void testGraphDijkstra() {
 }
 
 int main() {
-  testGraphDijkstra();
+  testGraphDijkstra1();
+  testGraphDijkstra2();
   return 0;
 }
