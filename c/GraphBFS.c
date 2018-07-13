@@ -88,6 +88,7 @@ void printScore() {
 
 void getTestGraph() {
   N = 6;
+  initScore();
   int(*g)[VERTICES + 1] = AdjacentMatrix;
   addEdge(g, 1, 2);
   addEdge(g, 1, 3);
@@ -105,7 +106,6 @@ void testGraphBFS() {
   int sol;
   q = newQueue();
   getTestGraph();
-  initScore();
   printAdjacentMatrix(AdjacentMatrix);
   printf("\nInitial status\n");
   printScore();

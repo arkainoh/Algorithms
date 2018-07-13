@@ -138,6 +138,7 @@ void getTestMap() {
   map[0][0] = 0; map[0][1] = 4; map[0][2] = 1;
   map[1][0] = 2; map[1][1] = 5; map[1][2] = 3;
   map[2][0] = 6; map[2][1] = 2; map[2][2] = 0;
+  initData();
 }
 
 void printOptimalPath(point start_point, point destination) {
@@ -181,7 +182,6 @@ void testGridBFS() {
   pq = newPriorityQueue(cmp);
   getTestMap();
   point start_point = {0, 0}, destination = {M - 1, N - 1};
-  initData();
   printMap();
   printf("\nInitial status\n");
   printScore();

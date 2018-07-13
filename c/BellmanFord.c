@@ -32,6 +32,7 @@ void printWeightedAdjacentMatrix(int(*g)[VERTICES + 1]) {
 }
 
 void initData() {
+  num_edges = 0;
   for(int i = 1; i <= N; i++) {
     score[i] = INFINITY;
     edgeTo[i] = i;
@@ -48,7 +49,7 @@ void printScore() {
 
 void getTestGraph1() {
   N = 6;
-  num_edges = 0;
+  initData();
   int(*g)[VERTICES + 1] = WeightedAdjacentMatrix;
   addEdge(g, 1, 2, 10);
   addEdge(g, 1, 3, 30);
@@ -63,7 +64,7 @@ void getTestGraph1() {
 
 void getTestGraph2() {
   N = 5;
-  num_edges = 0;
+  initData();
   int(*g)[VERTICES + 1] = WeightedAdjacentMatrix;
   addEdge(g, 1, 2, -1);
   addEdge(g, 1, 3, 4);
@@ -77,7 +78,7 @@ void getTestGraph2() {
 
 void getTestGraph3() {
   N = 5;
-  num_edges = 0;
+  initData();
   int(*g)[VERTICES + 1] = WeightedAdjacentMatrix;
   addEdge(g, 1, 2, -1);
   addEdge(g, 1, 3, 4);
@@ -126,7 +127,6 @@ void testBellmanFord1() {
   printf("\nTest 1\n");
   int start_point = 1, destination = 6, tmp;
   getTestGraph1();
-  initData();
   printWeightedAdjacentMatrix(WeightedAdjacentMatrix);
   printf("\nInitial status\n");
   printScore();
@@ -146,7 +146,6 @@ void testBellmanFord2() {
   printf("\nTest 2\n");
   int start_point = 1, destination = 5, tmp;
   getTestGraph2();
-  initData();
   printWeightedAdjacentMatrix(WeightedAdjacentMatrix);
   printf("\nInitial status\n");
   printScore();
@@ -166,7 +165,6 @@ void testBellmanFord3() {
   printf("\nTest 3\n");
   int start_point = 1, destination = 5, tmp;
   getTestGraph3();
-  initData();
   printWeightedAdjacentMatrix(WeightedAdjacentMatrix);
   printf("\nInitial status\n");
   printScore();

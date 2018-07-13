@@ -126,6 +126,7 @@ void printScore() {
 
 void getTestGraph1() {
   N = 6;
+  initData();
   int(*g)[VERTICES + 1][2] = WeightedAdjacentVertexMatrix;
   addEdge(g, 1, 2, 10);
   addEdge(g, 1, 3, 30);
@@ -140,6 +141,7 @@ void getTestGraph1() {
 
 void getTestGraph2() {
   N = 5;
+  initData();
   int(*g)[VERTICES + 1][2] = WeightedAdjacentVertexMatrix;
   addEdge(g, 1, 2, -1);
   addEdge(g, 1, 3, 4);
@@ -170,7 +172,6 @@ void testGraphDijkstra1() {
   int sol;
   pq = newPriorityQueue(cmp);
   getTestGraph1();
-  initData();
   printWeightedAdjacentVertexMatrix(WeightedAdjacentVertexMatrix);
   printf("\nInitial status\n");
   printScore();
@@ -189,7 +190,6 @@ void testGraphDijkstra2() {
   int sol;
   pq = newPriorityQueue(cmp);
   getTestGraph2();
-  initData();
   printWeightedAdjacentVertexMatrix(WeightedAdjacentVertexMatrix);
   printf("\nInitial status\n");
   printScore();
